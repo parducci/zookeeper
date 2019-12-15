@@ -1,0 +1,42 @@
+---
+# tasks file for pythian.logrotate
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.logrotate"
+    - "pythian.logrotate:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.logrotate"
+    - "pythian.logrotate:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.logrotate"
+    - "pythian.logrotate:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.logrotate"
+    - "pythian.logrotate:service"
+    ###########################
+    - "VMLC.provision"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.logrotate"
+    - "pythian.logrotate:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

@@ -1,0 +1,19 @@
+galaxy_info:
+  author: Kevin Pedersen <kpedersen@pythian.com>
+  description: Installs and configures SELinux.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.0.0.2
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - selinux
+    - linux
+    - security
+
+dependencies: []

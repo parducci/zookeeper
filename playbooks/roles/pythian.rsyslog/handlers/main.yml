@@ -1,0 +1,11 @@
+---
+# handlers file for pythian.rsyslog
+
+- name: reload systemd
+  command: systemctl daemon-reload
+
+- name: restart rsyslog service
+  service:
+    name: rsyslog
+    enabled: yes
+    state: restarted

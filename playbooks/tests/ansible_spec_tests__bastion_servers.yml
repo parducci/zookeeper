@@ -1,0 +1,17 @@
+---
+# [TESTS] Use for ansible_spec tests only (not server setup)
+# All roles applied to 'bastion_servers' inventory group
+- name: Ansiblespec-Tests-For-Bastion-Servers
+  hosts: bastion_servers
+  roles:
+    - pythian.base
+    - pythian.selinux
+    - pythian.logrotate
+    - pythian.rsyslog
+    - pythian.instance_os_user_mgmt
+    ###################
+    - pythian.openjdk_java
+    - pythian.ruby
+    - pythian.serverspec
+    - pythian.serverspec_extended_types
+    - pythian.ansible_spec

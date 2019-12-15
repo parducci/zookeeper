@@ -1,0 +1,7 @@
+---
+# vars file for base
+
+vmlc_stage_valid_values:
+  - "VMLC.all"
+  - "VMLC.provision"
+  - "VMLC.image_build"

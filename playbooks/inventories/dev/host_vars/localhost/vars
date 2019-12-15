@@ -1,0 +1,5 @@
+---
+# file: vars
+# Non-sensitive host variables and references to sensitive variables.
+
+ansible_connection: local

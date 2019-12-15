@@ -1,0 +1,41 @@
+---
+# tasks file for pythian.instance_os_user_mgmt
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.instance_os_user_mgmt"
+    - "pythian.instance_os_user_mgmt:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.instance_os_user_mgmt"
+    - "pythian.instance_os_user_mgmt:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.instance_os_user_mgmt"
+    - "pythian.instance_os_user_mgmt:config"
+    ###########################
+    - "VMLC.provision"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.instance_os_user_mgmt"
+    - "pythian.instance_os_user_mgmt:service"
+    ###########################
+    - "VMLC.provision"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.instance_os_user_mgmt"
+    - "pythian.instance_os_user_mgmt:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

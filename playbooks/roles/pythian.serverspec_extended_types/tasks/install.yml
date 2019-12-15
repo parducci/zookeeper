@@ -1,0 +1,39 @@
+---
+# file: install.yml
+
+- name: Check if serverspec_extended_types gem is installed
+  command: "gem list -i {{ serverspec_extended_types_gem_name }}"
+  register: result
+  failed_when: false
+  changed_when: false
+  check_mode: no
+
+- block:
+
+    - name: Install bundler gem
+      gem:
+        name: bundler
+        state: present
+        include_dependencies: yes
+        user_install: no
+
+    - name: Create temp directory for Gemfile
+      file:
+        path: "{{ serverspec_extended_types_gem_file_temp_dir }}"
+        state: directory
+        mode: 0755
+
+    - name: Create Gemfile for serverspec_extended_types gem install
+      template:
+        src: Gemfile.j2
+        dest: "{{ serverspec_extended_types_gem_file_temp_dir }}/Gemfile"
+        mode: 0644
+
+    - name: Install serverspec_extended_types gem using bundler
+      shell: /usr/local/bin/bundle install
+      args:
+        chdir: "{{ serverspec_extended_types_gem_file_temp_dir }}"
+
+  when: (result is failed) or
+        (result.rc != 0) or
+        ('false' in result.stdout_lines)

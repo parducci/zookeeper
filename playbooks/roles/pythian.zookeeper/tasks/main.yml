@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.zookeeper
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.zookeeper"
+    - "pythian.zookeeper:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.zookeeper"
+    - "pythian.zookeeper:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.zookeeper"
+    - "pythian.zookeeper:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.zookeeper"
+    - "pythian.zookeeper:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.zookeeper"
+    - "pythian.zookeeper:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

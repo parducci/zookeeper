@@ -1,0 +1,2 @@
+# Placeholder which will be overwritten by terraform.
+# See templates/ansiblehosts.tpl in project root for inventory file structure.

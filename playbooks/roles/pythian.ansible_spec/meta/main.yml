@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Rory Bramwell <bramwell@pythian.com>
+  description: Install Ansible_spec.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.2.1.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - ansible_spec
+    - ansible
+    - serverspec
+    - rspec
+    - ruby
+    - gem
+    - testing
+
+dependencies:
+  - { role: pythian.ruby }

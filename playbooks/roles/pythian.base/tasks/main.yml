@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.base
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.base"
+    - "pythian.base:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.base"
+    - "pythian.base:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.base"
+    - "pythian.base:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.base"
+    - "pythian.base:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.base"
+    - "pythian.base:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

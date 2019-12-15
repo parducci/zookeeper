@@ -1,0 +1,32 @@
+---
+# file: install.yml
+
+- name: Wait for /var/lib/dpkg/lock to be released
+  shell: |
+    while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+    do
+      sleep 1
+    done
+  changed_when: false
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  register: apt_cache_update_result
+  until: apt_cache_update_result is succeeded
+  retries: 5
+  delay: 5
+  changed_when: false
+
+- name: Wait for /var/lib/dpkg/lock to be released
+  shell: |
+    while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+    do
+      sleep 1
+    done
+  changed_when: false
+
+- name: Install debconf, ntp, jq command-line JSON processor
+  apt:
+    name: ["debconf", "debconf-utils", "ntp", "jq"]
+    state: present

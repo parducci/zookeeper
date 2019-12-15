@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Pythian
+  description: Installs Apache Zookeeper
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.2.1.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+      - bionic
+
+  galaxy_tags:
+    - zookeeper
+
+dependencies: []

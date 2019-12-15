@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.serverspec_extended_types
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.serverspec_extended_types"
+    - "pythian.serverspec_extended_types:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.serverspec_extended_types"
+    - "pythian.serverspec_extended_types:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.serverspec_extended_types"
+    - "pythian.serverspec_extended_types:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.serverspec_extended_types"
+    - "pythian.serverspec_extended_types:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.serverspec_extended_types"
+    - "pythian.serverspec_extended_types:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

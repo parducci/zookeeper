@@ -1,0 +1,42 @@
+---
+# tasks file for pythian.rsyslog
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.rsyslog"
+    - "pythian.rsyslog:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.rsyslog"
+    - "pythian.rsyslog:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.rsyslog"
+    - "pythian.rsyslog:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.rsyslog"
+    - "pythian.rsyslog:service"
+    ###########################
+    - "VMLC.provision"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.rsyslog"
+    - "pythian.rsyslog:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

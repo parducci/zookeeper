@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.ruby
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.ruby"
+    - "pythian.ruby:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.ruby"
+    - "pythian.ruby:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.ruby"
+    - "pythian.ruby:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.ruby"
+    - "pythian.ruby:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.ruby"
+    - "pythian.ruby:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

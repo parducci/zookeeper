@@ -1,0 +1,20 @@
+galaxy_info:
+  author: williamyeh, Updated by Rory Bramwell <bramwell@pythian.com>, updated by Marcin Pastecki <pastecki@pythian.com>
+  description: Open JDK 8.
+  license: Apache
+
+  min_ansible_version: 2.0.0.2
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - 18
+
+  galaxy_tags:
+  - development
+  - system
+  - java
+  - jdk
+  - jvm
+
+dependencies: []

@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Rory Bramwell <bramwell@pythian.com>
+  description: Install Ruby.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.2.1.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - ruby
+    - rubygems
+
+dependencies: []

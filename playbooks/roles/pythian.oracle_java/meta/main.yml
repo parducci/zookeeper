@@ -1,0 +1,20 @@
+galaxy_info:
+  author: williamyeh, Updated by Rory Bramwell <bramwell@pythian.com>
+  description: Oracle JDK 8.
+  license: Apache
+
+  min_ansible_version: 2.5.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+  - development
+  - system
+  - java
+  - jdk
+  - jvm
+
+dependencies: []

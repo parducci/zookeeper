@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.rolename
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.rolename"
+    - "pythian.rolename:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.rolename"
+    - "pythian.rolename:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.rolename"
+    - "pythian.rolename:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.rolename"
+    - "pythian.rolename:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.rolename"
+    - "pythian.rolename:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.openjdk_java
+
+- include: check_vars.yml
+  tags:
+    - "pythian.openjdk_java"
+    - "pythian.openjdk_java:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- include: install.yml
+  tags:
+    - "pythian.openjdk_java"
+    - "pythian.openjdk_java:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- include: config.yml
+  tags:
+    - "pythian.openjdk_java"
+    - "pythian.openjdk_java:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- include: service.yml
+  tags:
+    - "pythian.openjdk_java"
+    - "pythian.openjdk_java:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- include: cleanup.yml
+  tags:
+    - "pythian.openjdk_java"
+    - "pythian.openjdk_java:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

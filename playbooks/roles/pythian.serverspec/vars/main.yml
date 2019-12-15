@@ -1,0 +1,5 @@
+---
+# vars file for serverspec
+
+serverspec_gem_name: serverspec
+serverspec_gem_file_temp_dir: /tmp/ansible_roles/serverspec

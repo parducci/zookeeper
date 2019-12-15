@@ -1,0 +1,11 @@
+---
+# file: service.yml
+
+- name: Enable ntp
+  service:
+    name: ntp
+    enabled: yes
+    state: started
+
+- name: Force all notified handlers to run
+  meta: flush_handlers

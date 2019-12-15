@@ -1,0 +1,64 @@
+---
+# file: install.yml
+
+- name: Wait for /var/lib/dpkg/lock to be released
+  shell: |
+    while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+    do
+      sleep 1
+    done
+  changed_when: false
+
+- name: Install selinux
+  apt:
+    name: ["selinux-basics", "python3-selinux", "auditd"]
+    state: present
+
+- name: Wait for /var/lib/dpkg/lock to be released
+  shell: |
+    while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+    do
+      sleep 1
+    done
+  changed_when: false
+
+# Separated due to inconsistent installation results
+- name: Install selinux-policy-default
+  apt:
+    name: ["selinux-policy-default"]
+    state: present
+  register: selinux_result
+  until: selinux_result is succeeded
+  retries: 2
+  delay: 5
+  ignore_errors: true
+
+# Check if the required policy.kern link was created
+- name: Check for an existing policy.kern file/link
+  stat:
+    path: '/etc/selinux/default/modules/active/policy.kern'
+  register: selinux_policy_kern_file_result
+  changed_when: false
+
+# Reinstall selinux-policy-default if the link was created
+- block:
+
+    - name: Wait for /var/lib/dpkg/lock to be released
+      shell: |
+        while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+        do
+          sleep 1
+        done
+      changed_when: false
+
+    - name: Force install selinux-policy-default package
+      apt:
+        state: present
+        force: yes
+
+  when: (selinux_result is failed) and (selinux_policy_kern_file_result.stat.exists == true)
+
+# Check if the failure condition still holds true
+- name: Check if selinux-policy-default package installation failed
+  fail: msg="Failed to install selinux-policy-default"
+  when: (selinux_result is failed) and (selinux_policy_kern_file_result.stat.exists == false)

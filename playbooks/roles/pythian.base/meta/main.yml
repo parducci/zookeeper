@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Pythian
+  description: Installs base packages and settings.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.0.0.2
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - base
+    - common
+    - baseline
+    - packages
+    - settings
+    - os
+
+dependencies: []

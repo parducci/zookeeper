@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.ansible_spec
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.ansible_spec"
+    - "pythian.ansible_spec:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.ansible_spec"
+    - "pythian.ansible_spec:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.ansible_spec"
+    - "pythian.ansible_spec:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.ansible_spec"
+    - "pythian.ansible_spec:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.ansible_spec"
+    - "pythian.ansible_spec:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

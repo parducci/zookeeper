@@ -1,0 +1,5 @@
+---
+# defaults file for pythian.serverspec
+
+# Serverspec version to install
+serverspec_version: "2.41.3"

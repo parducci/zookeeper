@@ -1,0 +1,11 @@
+---
+# defaults file for pythian.ruby
+
+# Ruby packages to install
+ruby_packages:
+  - gcc
+  - make
+  - ruby
+  - ruby-dev
+  - rubygems-integration
+  - rake

@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.oracle_java
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.oracle_java"
+    - "pythian.oracle_java:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.oracle_java"
+    - "pythian.oracle_java:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.oracle_java"
+    - "pythian.oracle_java:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.oracle_java"
+    - "pythian.oracle_java:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.oracle_java"
+    - "pythian.oracle_java:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

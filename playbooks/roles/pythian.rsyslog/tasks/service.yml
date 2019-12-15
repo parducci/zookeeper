@@ -1,0 +1,11 @@
+---
+# file: service.yml
+
+- name: start rsyslog service
+  service:
+    name: rsyslog
+    enabled: yes
+    state: started
+
+- name: Force all notified handlers to run
+  meta: flush_handlers

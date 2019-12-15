@@ -1,0 +1,42 @@
+---
+# file: vars
+# Non-sensitive group variables and references to sensitive variables.
+
+############################################################################
+# Settings for 'pythian.instance_os_user_mgmt' role
+############################################################################
+
+# Users are the normal non-sudoers users, admins have sudo access, and
+# delete_users are accounts that needs to be deleted.
+
+users:
+  - name: balatero
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsLfqMsKRXyWXa+rcO7c4QU/QeS3P28PXSAuf61SXsojviOAp4AYPnRISZBTm0KuqgDa/OpXaFfLNBQhGX8parPUcbqBXktN/84B9ajxt1CCn/WkT1CklkiUyVD6+4Nim8FDu+7s4bf3f5LR4SrkCKh0rjkNUHYR71bHhb0YRVRQCXGovE8RNMie+4eU7pYbo/eQRnPfLJHVIOMgj8Dhe/Imyu0xo454kafnk1/B6pWrIvNdXw4W5wCoIg3I49z/XQLMq5QHO6v9rUZC7uoRy1+xo3g49UttO9ewfDHrEkWxtzv2EyQOrohr3HKL15ceRer6dtDUsgqakx98DKmqTemS1lgNsmkg7G0wYT8Z4VMj4w19FONV1Pk6PM0Rutw/nO815LpcjHJJCF2nTcHhdVumZ1tUR3KADgn2nedQHE9iA4JdUsBzisNSVdkjrKeryYmB1XQY9lrXFMp+L4wRS1d3XvOjVkO46O9Ovgw+19rtLy9xpDmonj29UBO55BTGFV0+CxJdFCyvYj1qNQgq3rl1o+lxT6V1UvtyZCqo3jwT8G/4htxhuWsW2zWsxSJqTLHRvVps78bW0hF1t2JS7yIKjcUuFVbMB3yWWHOZpZu30i7qPWHgf4Yyvjw3RX/MCEpJUgTVOwsxR988Uj4QaZKGCaJCvqvuCG0iG712anww== imported-openssh-key"
+
+admins:
+  - name: pastecki
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC3MKSTk/Nlh04akplZ5dT+sxaNxKgVP6gxIcZTh5MhAb9sJguSq2hQrj4cyeQcjnoA+h84LenctQO42G7pFJPJjPSjOQWngcW1Fh26nDSUpGW6tvQlMeV9wA/i+F+YlgmwAUdo2uoHp+06SvL8NaaodBDY6ILukdhbI45Ubhq7gdJ1Lz9EEzIKZXdZyGyh5lA9lF2jOPWXpRDDsfIRzqGdC3mphBwFQUlwBMKP4yYZPs368SxhCcdF4Hs5IYPU0p8sncAKqzxXmCS9XUAAtaPT9/s6eszH4fS9UvnVUaVYXDjPQkgyOukEPqaYbHdt0fVNrN/JGebVoXINk4hkSb85cfNy63qfWVoMtC8TCX5U1oVqX6vuKfo12PDKBSETHvfjoHEA2V55+gYvMatW+/ct0YjotEZoSLLuSLPH4T3VjI5/c68TaQVmBvq2HZWoRzOOVkyhKBbYgYikAmBYioa/saKDG9tTNWll2HxwaWaRLHdufvqI8YN+3adMCr4jPOWeFiuj3a2NNAP/I6aoSLJiaLtkSCuHYkvUxI7aVBNceLiaIe0MlO6wvAuvynQM9MM4nBaz4DTDwQzgUlAjzjPDOaWlQsFmk7RyzzLcGIfDXQqsPmiLvBcr/zioBDs2EU7LATzuVJpfE48iX2RnUhvvkvxkrN1NVjq1AzpUqiiOew== mpastecki@mrcxps"
+  - name: parducci
+    key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtmz7XmRhwxKcPvWSifXLTdtnXT2tSYW4fU5wflc+KjKWH8bax7cd4SnTsy41aMJvqcrm9ytrnbKgP16QKohW3OXCA0REf+arBbxcpZ69dqZbFmolMa+e74VWxvrYUemyveUcxFyTDKwJwDGpTIPXQCMl+kXT2fnxxaKmjaK5O7SnhKuRV3zpRtCJmi4W8dBxPbGYH3I78431JEfyAcHbhlhqtsVfZ14Qlg2Ako2g4igNbxVFFZ3kBkQkafIKA71k/eecsaYdZlqVUIqWeN4sLNloU7j9VEOk+hwsY+gdVRrNKkpzI449I0PLdxh1B6+Qyo0ktxs9ycpyqLluot3nd pardu@arabella"
+
+groupname:
+  - sudo
+  - dev
+  - admin
+
+user_group:
+  - groupname: sudo
+    group_users:
+      - pastecki
+      - parducci
+      - balatero
+  - groupname: admin
+    group_users:
+      - pastecki
+      - parducci
+      - balatero
+  - groupname: dev
+    group_users:
+      - pastecki
+      - parducci
+      - balatero

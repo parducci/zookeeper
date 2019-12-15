@@ -1,0 +1,21 @@
+{{ ansible_managed | comment }}
+
+# the location to store the in-memory database snapshots and, unless specified otherwise, the transaction log of updates to the database.
+dataDir={{ zk_data_dir }}
+# the location to store the transaction log
+dataLogDir={{ zk_log_dir }}
+# the port at which the clients will connect
+clientPort={{ zk_port }}
+# per-ip limit on the number of connections
+maxClientCnxns={{ zk_max_client_connections }}
+# the basic time unit in milliseconds used by ZooKeeper. It is used to do heartbeats and the minimum session timeout will be twice the tickTime.
+tickTime={{ zk_tick_time }}
+# The number of ticks that the initial synchronization phase can take
+initLimit={{ zk_init_ticks_limit }}
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit={{ zk_sync_limit }}
+# zoo servers
+{% for server in zk_servers %}
+server.{{loop.index}}={{ server }}:{{ zk_leader_port }}:{{ zk_leader_election_port }}{{ '' }}
+{% endfor %}

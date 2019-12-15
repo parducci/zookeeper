@@ -1,0 +1,7 @@
+---
+# defaults file for pythian.selinux
+
+selinux_conf_file: /etc/selinux/config
+selinux_state: enforcing
+selinux_policy: default
+selinux_localdefs: 0

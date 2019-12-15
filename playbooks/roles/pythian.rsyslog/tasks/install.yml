@@ -1,0 +1,15 @@
+---
+# file: install.yml
+
+- name: Wait for /var/lib/dpkg/lock to be released
+  shell: |
+    while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+    do
+      sleep 1
+    done
+  changed_when: false
+
+- name: Ensure that rsyslog is installed
+  apt:
+    name: rsyslog={{ rsyslog_version }}
+    state: present

@@ -1,0 +1,17 @@
+---
+# file: config.yml
+
+- name: "Configure {{ selinux_conf_file }} file"
+  become: yes
+  become_user: root
+  template:
+    src: selinux_config.j2
+    dest: "{{ selinux_conf_file }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure selinux
+  selinux:
+    policy: "{{ selinux_policy }}"
+    state: "{{ selinux_state }}"

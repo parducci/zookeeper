@@ -1,0 +1,5 @@
+---
+# [TESTS] Use for ansible_spec tests only (not server setup)
+# Includes for all roles applied to the site ("child" inventory groups)
+- include: tests/ansible_spec_tests__bastion_servers.yml
+- include: tests/ansible_spec_tests__zk_servers.yml

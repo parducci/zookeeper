@@ -1,0 +1,50 @@
+---
+# file: config.yml
+
+- name: Add Group
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ groupname }}"
+
+- name: Add User
+  user:
+    name: "{{ item.name }}"
+    state: present
+    shell: /bin/bash
+    group: dev
+    update_password: always
+  with_items:
+    - "{{ users }}"
+
+- name: Add existing user to group
+  user:
+    name: "{{ item.1 }}"
+    groups: "{{ item.0.groupname }}"
+    append: yes
+  with_subelements:
+    - "{{ user_group }}"
+    - group_users
+
+- name: Deleting Users
+  user:
+    name: "{{ item.name }}"
+    state: absent
+  with_items:
+    - "{{ delete_users }}"
+
+- name: Delete groups
+  group:
+    name: "{{ item.groupname }}"
+    state: absent
+  with_items:
+    - "{{ delete_groups }}"
+
+- name: Set sudoers content
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440

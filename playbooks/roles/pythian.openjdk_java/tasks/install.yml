@@ -1,0 +1,9 @@
+---
+# install.yml
+
+- name: Install OpenJDK Java
+  package:
+    name: "{{ item }}"
+    state: "present"
+  with_items: "{{ java_packages }}"
+

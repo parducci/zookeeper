@@ -1,0 +1,5 @@
+---
+# vars file for ansible_spec
+
+ansible_spec_gem_name: ansible_spec
+ansible_spec_gem_file_temp_dir: /tmp/ansible_roles/ansible_spec

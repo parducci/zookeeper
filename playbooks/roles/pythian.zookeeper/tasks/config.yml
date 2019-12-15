@@ -1,0 +1,44 @@
+---
+# file: config.yml
+
+- name: Configure symlink to Zookeeper installation
+  file:
+    src: "{{ zk_install_dir }}/{{ zk_tarball_file }}"
+    dest: "{{ zk_working_dir }}"
+    state: link
+    owner: "{{ zk_user }}"
+    group: "{{ zk_group }}"
+
+- name: Set zookeeper as systemd service
+  template:
+    src: zookeeper.service.j2
+    dest: /etc/systemd/system/zookeeper.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - systemd daemon reload
+    - enable zookeeper
+    - restart zookeeper
+
+- name: Configure zk myid file
+  template:
+    src: myid.j2
+    dest: "{{ zk_data_dir }}/myid"
+    owner: "{{ zk_user }}"
+    group: "{{ zk_group }}"
+    mode: 0644
+  notify:
+    - restart zookeeper
+
+- name: Configure zoo.cfg files
+  template:
+    src: zoo.cfg.j2
+    dest: "{{ zk_conf_dir }}/zookeeper.conf"
+    owner: "{{ zk_user }}"
+    group: "{{ zk_group }}"
+    mode: 0644
+  notify:
+    - restart zookeeper
+
+- meta: flush_handlers

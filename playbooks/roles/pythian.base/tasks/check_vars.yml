@@ -1,0 +1,12 @@
+---
+# checking if required variables are set
+
+- name: Checking if required variables are set
+  fail: msg="{{ item }} is not defined"
+  when: not (item is defined)
+  with_items:
+    - vmlc_stage
+
+- name: Checking if vmlc_stage value is valid
+  fail: msg="Invalid value for vmlc_stage. Must be one of [{{ vmlc_stage_valid_values | join(', ') }}]"
+  when: not (vmlc_stage in vmlc_stage_valid_values)

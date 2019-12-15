@@ -1,0 +1,36 @@
+---
+# install.yml
+
+- name: Set Java variables
+  import_tasks: set_role_variables.yml
+
+- name: Copy scripts to server
+  copy:
+    src: "check-java-version.sh"
+    dest: "{{ java_download_path }}/"
+    mode: "a+x"
+
+- name: Check if specific version of Oracle JDK is installed
+  shell: LC_ALL="en_US.UTF-8" {{ java_download_path }}/check-java-version.sh "{{ jdk_version }}"
+  register: jdk_info
+  changed_when: false
+  failed_when: jdk_info.rc > 0
+
+- name: Install Oracle Java JDK
+  import_tasks: install_jdk.yml
+  when: (jdk_info.stdout|from_json).not_found
+
+- name: Delegate to JCE zip installation process
+  import_tasks: install_jce.yml
+  when: java_install_jce
+
+- name: Get java version
+  shell: |
+    java -version 2>&1
+  register: java_version_result
+  changed_when: false
+
+- name: Show java version
+  debug:
+    msg: "{{ java_version_result.stdout }}"
+  changed_when: false

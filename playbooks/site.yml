@@ -1,0 +1,17 @@
+---
+# Configure the site
+
+# Install packages required for all servers
+- import_playbook: common.yml
+
+# Setup users on instances
+- import_playbook: instance_os_users.yml
+
+# Setup bastion host
+- import_playbook: bastion.yml
+
+# Setup zookeeper hosts:
+- import_playbook: zookeeper.yml
+
+# Cleanup tasks
+- import_playbook: cleanup.yml

@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Pythian
+  description: Manages Google Compute Engine (GCE) VM instance operating system users.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.0.0.2
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - gce
+    - gcp
+    - google
+    - googlecompute
+    - instance
+    - vm
+    - users
+    - os
+
+dependencies: []

@@ -1,0 +1,5 @@
+---
+# file: vault
+# Sensitive group variables and references to sensitive variables.
+# Leave dummy_var if no real variables are stored here
+dummy_var: dummy

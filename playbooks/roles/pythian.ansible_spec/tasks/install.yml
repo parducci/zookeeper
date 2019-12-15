@@ -1,0 +1,70 @@
+---
+# file: install.yml
+
+- name: Wait for /var/lib/dpkg/lock to be released
+  shell: |
+    while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+    do
+      sleep 1
+    done
+  changed_when: false
+
+- name: Install prerequisites
+  apt:
+    name: ["gcc", "make", "libffi-dev"]
+    state: present
+
+- name: Install bundler gem
+  gem:
+    name: bundler
+    state: present
+    include_dependencies: yes
+    user_install: no
+
+- name: Check if ansible_spec gem is installed
+  command: "gem list -i {{ ansible_spec_gem_name }}"
+  register: gem_result
+  failed_when: false
+  changed_when: false
+  check_mode: no
+
+- name: Check if ansible_spec gem at version is installed
+  command: "gem list -i {{ ansible_spec_gem_name }} -v {{ ansible_spec_version }}"
+  register: gem_version_result
+  failed_when: false
+  changed_when: false
+  check_mode: no
+
+- name: Remove other version of ansible_spec gem
+  gem:
+    name: "{{ ansible_spec_gem_name }}"
+    state: absent
+  when:
+    - (gem_result is succeeded)
+    - (gem_version_result is failed) or
+      (gem_version_result.rc != 0) or
+      ('false' in gem_version_result.stdout_lines)
+
+- block:
+
+    - name: Create temp directory for ansible_spec installation files
+      file:
+        path: "{{ ansible_spec_gem_file_temp_dir }}"
+        state: directory
+        mode: 0755
+
+    - name: Create Gemfile for ansible_spec gem install
+      template:
+        src: Gemfile.j2
+        dest: "{{ ansible_spec_gem_file_temp_dir }}/Gemfile"
+        mode: 0644
+
+    # Needed to ensure the proper dependencies are installed
+    - name: Install ansible_spec gem using bundler
+      command: /usr/local/bin/bundle install
+      args:
+        chdir: "{{ ansible_spec_gem_file_temp_dir }}"
+
+  when: (gem_version_result is failed) or
+        (gem_version_result.rc != 0) or
+        ('false' in gem_version_result.stdout_lines)

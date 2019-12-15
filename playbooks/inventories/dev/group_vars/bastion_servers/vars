@@ -1,0 +1,28 @@
+---
+# file: vars
+# Non-sensitive group variables and references to sensitive variables.
+
+############################################################################
+# Settings for 'pythian.ruby' role
+############################################################################
+
+ruby_packages: ["gcc", "make", "ruby", "ruby-dev", "rubygems-integration", "rake"]
+
+
+############################################################################
+# Settings for 'pythian.serverspec' role
+############################################################################
+
+serverspec_version: 2.41.3
+
+############################################################################
+# Settings for 'pythian.serverspec_extended_types' role
+############################################################################
+
+serverspec_extended_types_version: 0.1.1
+
+############################################################################
+# Settings for 'pythian.ansible_spec' role
+############################################################################
+
+ansible_spec_version: 0.2.22

@@ -1,0 +1,8 @@
+---
+# file: install.yml
+
+- name: No install tasks
+  debug:
+    msg: "No install tasks"
+    verbosity: 1
+

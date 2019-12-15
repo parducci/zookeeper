@@ -1,0 +1,10 @@
+---
+# Install and configure common settings for all hosts
+- name: Install-And-Configure-Common-Settings
+  hosts: all
+  roles:
+    - { role: pythian.base }
+    - { role: pythian.selinux }
+    - { role: pythian.logrotate }
+    - { role: pythian.rsyslog }
+    - { role: pythian.openjdk_java }

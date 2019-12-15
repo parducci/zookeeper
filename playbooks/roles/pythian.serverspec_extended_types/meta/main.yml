@@ -1,0 +1,25 @@
+galaxy_info:
+  author: Rory Bramwell <bramwell@pythian.com>
+  description: Install Serverspec extended types for Serverspec 2.x.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.2.1.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - serverspec
+    - extended_types
+    - types
+    - rspec
+    - specinfra
+    - testing
+    - infrastructure
+
+dependencies:
+  - { role: pythian.ruby }
+  - { role: pythian.serverspec }

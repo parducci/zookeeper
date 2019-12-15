@@ -1,0 +1,71 @@
+---
+# file: vars
+# Non-sensitive group variables and references to sensitive variables.
+
+#############################################################################
+# Settings for 'pythian.logrotate' role
+#############################################################################
+
+# Variables for interpolating values in the file content{{ monit_publish_msg_to_pubsub_topic_script_file_path }}
+# Note: These are not a part of the role.
+logrotate_compress_syslog_log_files: "true"
+logrotate_retention_syslog_log_files: "30"
+
+# List of logrotate file and content hashes
+logrotate_logrotated_files:
+  - filename: "rsyslog"
+    content: |
+      /var/log/syslog
+      {
+        rotate {{ logrotate_retention_syslog_log_files }}
+        daily
+        missingok
+        notifempty
+      {% if logrotate_compress_syslog_log_files == "true" %}
+        delaycompress
+        compress
+      {% endif %}
+        postrotate
+          invoke-rc.d rsyslog rotate > /dev/null
+        endscript
+      }
+
+      /var/log/mail.info
+      /var/log/mail.warn
+      /var/log/mail.err
+      /var/log/mail.log
+      /var/log/daemon.log
+      /var/log/kern.log
+      /var/log/auth.log
+      /var/log/user.log
+      /var/log/lpr.log
+      /var/log/cron.log
+      /var/log/debug
+      /var/log/messages
+      {
+        rotate 4
+        weekly
+        missingok
+        notifempty
+        compress
+        delaycompress
+        sharedscripts
+        postrotate
+          invoke-rc.d rsyslog rotate > /dev/null
+        endscript
+      }
+
+############################################################################
+# Settings for 'pythian.oracle_java' role
+############################################################################
+
+java_version: 8
+java_subversion: 191
+java_build: 12
+java_url_modifier: "2787e4a523244c269598db4e85c51e0c"
+java_jdk_checksum: "53c29507e2405a7ffdbba627e6d64856089b094867479edc5ede4105c1da0d65"
+java_download_path: /tmp
+java_download_from_oracle: true
+java_remove_download: true
+java_set_javahome: true
+java_install_jce: true

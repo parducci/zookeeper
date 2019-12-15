@@ -1,0 +1,70 @@
+---
+# set necessary role variables.
+
+- name: Set general internal vars
+  set_fact:
+    jdk_version: "1.{{ java_version }}.0_{{ java_subversion }}"
+
+# platform-specific variables
+
+- name: Set java architecture
+  set_fact:
+    jdk_arch: "{{ 'i586'  if ansible_architecture == 'i386' else 'x64' }}"
+
+- name: Set java OS for Linux
+  set_fact:
+    jdk_os: linux
+
+# version-specific variables
+
+- name: Set internal vars for 1.8.0_152
+  set_fact:
+    jdk_version_detail: "{{ java_version }}u{{ java_subversion }}-b16"
+    jdk_tarball_url_modifier: "aa0333dd3019491ca4f6ddbe78cdb6d0"
+  when: java_version == 8 and java_subversion == 152
+
+- name: Set internal vars for 1.8.0_151
+  set_fact:
+    jdk_version_detail: "{{ java_version }}u{{ java_subversion }}-b12"
+    jdk_tarball_url_modifier: "e758a0de34e24606bca991d704f6dcbf"
+  when: java_version == 8 and java_subversion == 151
+
+- name: Set internal vars for 1.8.0_144
+  set_fact:
+    jdk_version_detail: "{{ java_version }}u{{ java_subversion }}-b01"
+    jdk_tarball_url_modifier: "090f390dda5b47b9b721c7dfaa008135"
+  when: java_version == 8 and java_subversion == 144
+
+- name: Set internal vars for generic Java version
+  set_fact:
+    jdk_version_detail: "{{ java_version }}u{{ java_subversion }}-b{{ java_build }}"
+    jdk_tarball_url_modifier: "{{ java_url_modifier }}"
+  when: jdk_version_detail is not defined and java_build is defined
+
+- name: Compose filename, if necessary
+  set_fact:
+    jdk_tarball_file: "jdk-{{ java_version }}u{{ java_subversion }}-{{ jdk_os }}-{{ jdk_arch }}"
+  when: jdk_tarball_file is not defined
+
+- name: Compose url for downloading file, if necessary
+  set_fact:
+    jdk_tarball_url:  "http://download.oracle.com/otn-pub/java/jdk/{{ jdk_version_detail }}/{{ jdk_tarball_url_modifier }}/{{ jdk_tarball_file }}"
+  when: jdk_version_detail is defined
+
+# JCE variables
+
+- name: Set JCE variables for java 7
+  set_fact:
+    jce_zip_file:   "UnlimitedJCEPolicyJDK{{ java_version }}.zip"
+    jce_zip_folder: "UnlimitedJCEPolicy"
+  when: java_version == 7
+
+- name: Set JCE variables for java 8
+  set_fact:
+    jce_zip_file:   "jce_policy-{{ java_version }}.zip"
+    jce_zip_folder: "UnlimitedJCEPolicyJDK{{ java_version }}"
+  when: java_version == 8
+
+- name: Set JCE download file
+  set_fact:
+    jce_zip_url: "http://download.oracle.com/otn-pub/java/jce/{{ java_version }}/{{ jce_zip_file }}"

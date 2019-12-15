@@ -1,0 +1,95 @@
+---
+# file: install.yml
+
+- name: Compose filename, if necessary
+  set_fact:
+    zk_tarball_file: "zookeeper-{{ zk_version }}"
+  when: zk_tarball_file is not defined
+
+- name: Compose url for downloading file
+  set_fact:
+    zk_tarball_url:  "https://archive.apache.org/dist/zookeeper/{{ zk_tarball_file }}/{{ zk_tarball_file }}"
+
+- name: Make sure zk group is present
+  group:
+    name: "{{ zk_group }}"
+    state: present
+
+- name: Make sure zk user is present
+  user:
+    name: "{{ zk_user }}"
+    groups: "{{ zk_group }}"
+    home: "{{ zk_home_dir}}"
+    create_home: true
+
+- block:
+
+    - name: Check for existing Zookeeper tarball
+      stat:
+        path: "{{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz"
+      register: zk_tarball_check_result
+      changed_when: false
+
+    - name: Get the sha256 checksum of the zk tarball
+      shell: |
+        sha256sum {{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz | awk '{print $1}'
+      register: zk_tarball_checksum_result
+      changed_when: false
+      when: zk_tarball_check_result.stat.exists == true
+
+    - name: Remove ZK tarball if there is a checksum mismatch
+      file:
+        path: "{{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz"
+        state: absent
+      when:
+        - zk_tarball_check_result.stat.exists == true
+        - zk_tarball_checksum_result.stdout != zk_checksum
+
+    - name: Download ZK tarball (as tar.gz file)
+      get_url:
+        url: "{{ zk_tarball_url }}.tar.gz"
+        dest: "{{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz"
+        mode: 0640
+        checksum: "sha256:{{ zk_checksum }}"
+        timeout: 600
+
+  when: zk_download_from_apache|bool == true
+
+- name: Copy tarball from local
+  copy:
+    src: "{{ playbook_dir }}/files/{{ zk_tarball_file }}.tar.gz"
+    dest: "{{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz"
+  when: zk_download_from_apache|bool == false
+
+- name: Create ZK directories
+  file:
+    owner: "{{ zk_user }}"
+    group: "{{ zk_group }}"
+    path: "{{ item }}"
+    mode: "u=rwx,go=rx"
+    state: directory
+  with_items:
+   - "{{ zk_install_dir }}"
+   - "{{ zk_conf_dir }}"
+   - "{{ zk_data_dir }}"
+   - "{{ zk_log_dir }}"
+   - "{{ zk_logging_dir }}"
+
+- name: Install ZK via tarball file
+  unarchive:
+    src: "{{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz"
+    dest: "{{ zk_install_dir }}"
+    owner: "{{ zk_user }}"
+    group: "{{ zk_group }}"
+    mode: "go-w"
+    remote_src: yes
+
+- name: Remove temporary downloaded files, if required
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ zk_download_path }}/{{ zk_tarball_file }}.tar.gz"
+    - "{{ zk_download_path }}/check_zk_tarball_installed.sh"
+  ignore_errors: true
+  when: zk_remove_download

@@ -1,0 +1,58 @@
+pythian.zookeeper
+=========
+
+An Ansible role that installs and configures Apache Zookeeper.
+
+Requirements
+------------
+
+- Ansible verison 2.2.1.0+
+
+Role Variables
+--------------
+
+Available variables are listed below, along with default values (see `defaults/main.yml`):
+
+    zk_download_from_apache: true
+    zk_version: "3.4.12"
+    zk_user: "zookeeper"
+    zk_group: "zookeeper"
+    zk_home_dir: "/home/zookeeper"
+    zk_download_path: "/tmp"
+    zk_checksum: "c686f9319050565b58e642149cb9e4c9cc8c7207aacc2cb70c5c0672849594b9"
+    zk_install_dir: "/opt/zookeeper"
+    zk_conf_dir: "{{ zk_install_dir }}/conf"
+    zk_data_dir: "/data/zookeeper"
+    zk_log_dir: "{{ zk_data_dir }}/logs"
+    zk_port: 2181
+    zk_max_client_connections: 100
+    zk_tick_time: 2000
+    zk_init_ticks_limit: 10
+    zk_sync_limit: 5
+    zk_remove_download: false
+    zk_leader_port: 2888
+    zk_leader_election_port: 3888
+    zk_working_dir: "{{ zk_install_dir }}/current"
+    zk_logging_dir: "/var/log/zookeeper"
+
+Dependencies
+------------
+
+None.
+
+Example Playbook
+----------------
+
+    - hosts: servers
+      roles:
+         - { role: pythian.zookeeper }
+
+License
+-------
+
+MIT / BSD
+
+Author Information
+------------------
+
+Pythian

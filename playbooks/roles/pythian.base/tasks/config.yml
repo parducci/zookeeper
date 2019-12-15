@@ -1,0 +1,8 @@
+---
+# config.yml
+
+- name: No config tasks
+  debug:
+    msg: "No config tasks"
+    verbosity: 1
+

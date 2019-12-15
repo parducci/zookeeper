@@ -1,0 +1,13 @@
+---
+# defaults file for pythian.serverspec_extended_types
+
+# Serverspec extended types version to install
+serverspec_extended_types_version: "0.1.1"
+
+# Ruby packages to install
+ruby_packages:
+  - gcc
+  - ruby
+  - ruby-dev
+  - rubygems-integration
+  - rake

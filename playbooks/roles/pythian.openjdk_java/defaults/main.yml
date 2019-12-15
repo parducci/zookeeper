@@ -1,0 +1,5 @@
+---
+# user-configurable defaults
+
+java_packages:
+  - "openjdk-8-jdk"

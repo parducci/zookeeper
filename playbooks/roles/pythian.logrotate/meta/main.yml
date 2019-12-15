@@ -1,0 +1,17 @@
+galaxy_info:
+  author: Kevin Pedersen <kpedersen@pythian.com>, Rory Bramwell <bramwell@pythian.com>
+  description: Installs and configures logrotate.
+  company: Pythian
+  license: "license (BSD, MIT)"
+
+  min_ansible_version: 2.2.1.0
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - xenial
+
+  galaxy_tags:
+    - logrotate
+
+dependencies: []

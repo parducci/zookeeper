@@ -1,0 +1,4 @@
+---
+# Placeholder which will be overwritten by terraform.
+# See templates/ansible_inventory_all_vars_tf_managed.tpl
+# in project root for inventory group variables file structure.

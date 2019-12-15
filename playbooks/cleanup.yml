@@ -1,0 +1,23 @@
+---
+# Cleanup uneeded resources for all hosts
+- name: Cleanup-Uneeded-Resources-From-Servers
+  hosts: all
+
+  tasks:
+
+    - name: Wait for /var/lib/dpkg/lock to be released
+      shell: |
+        while (sudo lsof | awk '{print $NF}' | grep /var/lib/dpkg/lock > /dev/null 2>&1)
+        do
+          sleep 1
+        done
+      changed_when: false
+
+    - name: Run apt autoremove to clean up old packages
+      become: true
+      become_user: root
+      shell: sudo apt -y autoremove
+      args:
+        warn: no
+      register: autoremove_output
+      changed_when: "'The following packages will be REMOVED' in autoremove_output.stdout"

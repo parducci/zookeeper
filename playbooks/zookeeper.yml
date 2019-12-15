@@ -1,0 +1,7 @@
+---
+# Configure the Zookeeper hosts
+- name: Setup-ZooKeeper-Servers
+  hosts: zk_servers
+
+  roles:
+    - { role: pythian.zookeeper }

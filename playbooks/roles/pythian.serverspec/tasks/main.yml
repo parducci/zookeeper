@@ -1,0 +1,43 @@
+---
+# tasks file for pythian.serverspec
+
+- import_tasks: check_vars.yml
+  tags:
+    - "pythian.serverspec"
+    - "pythian.serverspec:check"
+    - "pythian.check"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: install.yml
+  tags:
+    - "pythian.serverspec"
+    - "pythian.serverspec:install"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: config.yml
+  tags:
+    - "pythian.serverspec"
+    - "pythian.serverspec:config"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: service.yml
+  tags:
+    - "pythian.serverspec"
+    - "pythian.serverspec:service"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"
+
+- import_tasks: cleanup.yml
+  tags:
+    - "pythian.serverspec"
+    - "pythian.serverspec:cleanup"
+    ###########################
+    - "VMLC.provision"
+    - "VMLC.image_build"

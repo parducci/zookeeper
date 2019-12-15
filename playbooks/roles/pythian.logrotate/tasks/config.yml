@@ -1,0 +1,12 @@
+---
+# file: config.yml
+
+- name: Create /etc/logrotate.d/ file(s)
+  copy:
+    content: |
+      {{ item.content }}
+    dest: "/etc/logrotate.d/{{ item.filename }}"
+    owner: "root"
+    group: "root"
+    mode: 0644
+  with_items: "{{ logrotate_logrotated_files }}"

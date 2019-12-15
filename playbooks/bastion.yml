@@ -1,0 +1,9 @@
+---
+# Configure the bastion hosts
+- name: Setup-Bastion-Servers
+  hosts: bastion_servers
+  roles:
+    - { role: pythian.ruby }
+    - { role: pythian.serverspec }
+    - { role: pythian.serverspec_extended_types }
+    - { role: pythian.ansible_spec }

@@ -1,0 +1,8 @@
+---
+# defaults file for pythian.rsyslog
+
+# rsyslog version to install from repository
+rsyslog_version: "8.32.0-1ubuntu4"
+
+# rsyslog version that is returned by rsyslogd
+rsyslogd_version: "8.32.0"

@@ -1,0 +1,4 @@
+---
+# Placeholder which will be overwritten by terraform.
+# See files/users/aaa_users_template.yml.example
+# in project root for inventory group variables file structure.
