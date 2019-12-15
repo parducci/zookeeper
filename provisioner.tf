@@ -31,7 +31,7 @@ data "template_file" "zookeeper_cfg_file_myids_entry_dict_list" {
 }
 
 data "template_file" "zookeeper_cfg_file_ids_entry_dict" {
-  template = "${element(module.zookeeper._private_dns, count.index)} , count.index)}"
+  template = "${element(module.zookeeper.zookeeper_private_dns, count.index)} , count.index)}"
   count = "${module.zookeeper.zookeeper_nodes_count}"
 }
 
